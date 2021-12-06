@@ -7,6 +7,9 @@ Things you may want to cover:
 
 * Ruby version
 
+Ruby 3.0.0p0
+Rails 6.1.4.1
+
 * System dependencies
 
 * Configuration
