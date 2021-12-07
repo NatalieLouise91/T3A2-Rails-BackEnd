@@ -10,11 +10,12 @@ Content-Type: application/json
     "password_confirmation": "123456"    
 }
 
-# Sign in with correct details
-# POST http://localhost:3000/api/auth/sign_in
-# Content-Type: application/json
+### Sign in with correct details
+POST http://localhost:3000/api/auth/sign_in
+Content-Type: application/json
 
-# {
-#     "email": "test9@test.com",
-#     "password": "123456"  
-# }
+{
+    "email": "johnny@test.com",
+    "password": "123456"
+}
+
