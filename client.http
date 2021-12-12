@@ -1,0 +1,21 @@
+### Testing User requests
+
+#Create user
+POST http://localhost:3000/api/auth/sign_up
+Content-Type: application/json
+
+{
+    "email": "test12@test.com",
+    "password": "123456",
+    "password_confirmation": "123456"    
+}
+
+### Sign in with correct details
+POST http://localhost:3000/api/auth/sign_in
+Content-Type: application/json
+
+{
+    "email": "johnny@test.com",
+    "password": "123456"
+}
+
