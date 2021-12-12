@@ -142,3 +142,4 @@ RSpec.describe Event, type: :model do
       expect(event).to be_valid
    end
 end
+
