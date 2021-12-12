@@ -71,7 +71,7 @@ Rails.application.configure do
   # Log disallowed deprecations.
   config.active_support.disallowed_deprecation = :log
 
-  # Tell Active Support which deprecation messages to disallow.
+  # Tell Active Support which deprecation occasions to disallow.
   config.active_support.disallowed_deprecation_warnings = []
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
