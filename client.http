@@ -1,3 +1,56 @@
+### index method
+
+GET http://localhost:3000/api/events
+
+### Successfully post an event
+
+POST http://localhost:3000/api/events
+content-type: application/json
+
+{
+    "name": "Anniversary",
+    "description": "happy event",
+    "date": "20/12/2021",
+    "attendees": 30,
+    "location": "Brisbane City",
+    "time": "2.30pm",
+    "contact_name": "Johnny",
+    "contact_phone": 111111 
+}
+
+### Unsuccessfully post an event
+
+POST http://localhost:3000/api/events
+content-type: application/json
+
+{
+    "name": "wedding",
+    "description": "happy event",
+    "date": "20/12/2020",
+    "attendees": 20,
+    "location": "Brisbane City",
+    "time": "2.30pm",
+    "contact_name": "Johnny"
+}
+
+### Show event id: 
+GET http://localhost:3000/api/events/1
+
+### Unsuccessfully find event id: 
+GET http://localhost:3000/api/events/10
+
+### Successfully update event 1
+PUT http://localhost:3000/api/events/1
+content-type: application/json
+
+{
+    "name": "Vivian",
+    "attendees": 200
+}
+
+### Successfully delete event with ID 1
+DELETE http://localhost:3000/api/events/1
+
 ### Testing User requests
 
 #Create user
@@ -5,9 +58,12 @@ POST http://localhost:3000/api/auth/sign_up
 Content-Type: application/json
 
 {
-    "email": "test12@test.com",
+    "email": "test@test.com",
     "password": "123456",
-    "password_confirmation": "123456"    
+    "password_confirmation": "123456",
+    "first_name": "johnny",
+    "last_name": "Nguyen",
+    "phone": 111111    
 }
 
 ### Sign in with correct details

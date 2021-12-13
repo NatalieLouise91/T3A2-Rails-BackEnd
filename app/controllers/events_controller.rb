@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
-    before_action :authenticate_user, except: [:index, :show] 
+    #before_action :authenticate_user, except: [:index, :show] 
     before_action :find_event, only: [:show, :update, :destroy]
-    before_action :check_ownership, only: [:destroy, :update] 
+    #before_action :check_ownership, only: [:destroy, :update] 
 
     def index
         @events = Event.all
@@ -18,26 +18,28 @@ class EventsController < ApplicationController
     end
 
     def create
-        #@event = event.create(event_params)
-        @event = current_user.events.create(event_params)
+        @event = Event.create(event_params)
+        #@event = current_user.events.create(event_params)
         if @event.errors.any?
             render json: @event.errors, status: :unprocessable_entity
-         else
-            render json: @event.transform_event, status: 201
-         end
-      end
+        else
+            render json: @event, status: 201
+        end
+    end
       
       def show
           render json: @event
         #   .transform_event
       end
 
-      def update
+    def update
+        # @event = Event.find(params[:id])
         @event.update(event_params)
+
         if @event.errors.any?
             render json: @event.errors, status: :unprocessable_entity
         else
-            render json: @event.transform_event, status: 201
+            render json: @event, status: 201
         end
     end
 
@@ -46,14 +48,14 @@ class EventsController < ApplicationController
         render json: {event: "event deleted"}, status: 204
     end
 
-    def my_events
-        @events = []
-        Event.find_by_user(current_user.username).order('updated_at DESC').each do |event|
-            @events << event.find_by(id: event.id).transform_event
-        end
-        render json: @events
-    end
-
+    # def my_events
+    #     @events = []
+    #     Event.find_by_user(current_user.username).order('updated_at DESC').each do |event|
+    #         @events << event.find_by(id: event.id).transform_event
+    #     end
+    #     render json: @events
+    # end
+    private
     def find_event
         begin
             @event = Event.find(params[:id])
@@ -62,16 +64,16 @@ class EventsController < ApplicationController
         end
     end
 
-    def check_ownership
-        if !current_user.isAdmin
-            if current_user.id != @event.user.id
-                render json: {error: "unauthorized action"}
-            end
-        end
-    end
-    private
+    # def check_ownership
+    #     if !current_user.admin
+    #         if current_user.id != @event.user.id
+    #             render json: {error: "unauthorized action"}
+    #         end
+    #     end
+    # end
+ 
     def event_params
-        params.require(:event).permit(:m_text)
+        params.require(:event).permit(:name, :description, :date, :attendees, :location, :time, :contact_name, :contact_phone)
     end
 end
 
