@@ -1,25 +1,23 @@
 ### index method
-
 GET http://localhost:3000/api/events
 
-### Successfully post an event
-
+### Successfully create an event
 POST http://localhost:3000/api/events
 content-type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzk1MjQ5MDcsInN1YiI6NH0.NqOs9apCyfIyY5bRSqERvC3o7cg6ldvrMXHfupC3ZqQ
 
 {
-    "name": "Anniversary",
-    "description": "happy event",
+    "name": "Authorization testing",
+    "description": "serious event",
     "date": "20/12/2021",
     "attendees": 30,
     "location": "Brisbane City",
     "time": "2.30pm",
-    "contact_name": "Johnny",
+    "contact_name": "Johnny1",
     "contact_phone": 111111 
 }
 
 ### Unsuccessfully post an event
-
 POST http://localhost:3000/api/events
 content-type: application/json
 
@@ -43,6 +41,7 @@ GET http://localhost:3000/api/events/10
 PUT http://localhost:3000/api/events/1
 content-type: application/json
 
+
 {
     "name": "Vivian",
     "attendees": 200
@@ -51,18 +50,23 @@ content-type: application/json
 ### Successfully delete event with ID 1
 DELETE http://localhost:3000/api/events/1
 
-### Testing User requests
+### unsuccessfully delete event with ID 1000
+DELETE http://localhost:3000/api/events/1000
 
+
+
+
+### Testing User requests
 #Create user
 POST http://localhost:3000/api/auth/sign_up
 Content-Type: application/json
 
 {
-    "email": "test@test.com",
-    "password": "123456",
-    "password_confirmation": "123456",
-    "first_name": "johnny",
-    "last_name": "Nguyen",
+    "email": "johnny1@test.com",
+    "password": "111111",
+    "password_confirmation": "111111",
+    "first_name": "johnny1",
+    "last_name": "Nguyen1",
     "phone": 111111    
 }
 
