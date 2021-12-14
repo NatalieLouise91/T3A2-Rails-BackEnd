@@ -64,11 +64,11 @@ class EventsController < ApplicationController
     end
 
     def check_ownership
-        # if !current_user.admin
+        if !current_user.admin
             if current_user.id != @event.user.id
                 render json: {error: "unauthorized action"}, status: 401
             end
-        # end
+        end
     end
  
     def event_params

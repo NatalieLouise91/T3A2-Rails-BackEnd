@@ -2,6 +2,7 @@ class UsersController < ApplicationController
     skip_before_action :verify_authenticity_token, raise: false
     def create
         @user = User.create(user_params)
+        @user.admin = false
         #Check if the user is saved, if not then show an error    
         if @user.save
             #Using JWT to send back necessary information
