@@ -11,10 +11,13 @@ class Event < ApplicationRecord
 
    def transform_event
       return { 
-         author: self.user.first_name.capitalize,
-         event_name: self.name.capitalize,
+         author: self.user.first_name,
+         event_name: self.name,
          description: self.description,
          date: self.date,
+         attendees: self.attendees,
+         location: self.location,
+         time: self.time,
          contact_name: self.contact_name,
          contact_phone: self.contact_phone,
          posted: self.created_at,
