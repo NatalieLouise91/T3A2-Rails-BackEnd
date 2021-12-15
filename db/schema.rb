@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_001154) do
+ActiveRecord::Schema.define(version: 2021_12_15_023211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2021_12_15_001154) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rostered_tms", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.bigint "roster_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["roster_id"], name: "index_rostered_tms_on_roster_id"
   end
 
   create_table "rosters", force: :cascade do |t|
@@ -61,6 +70,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_001154) do
   end
 
   add_foreign_key "events", "users"
+  add_foreign_key "rostered_tms", "rosters"
   add_foreign_key "rosters", "events"
   add_foreign_key "rosters", "roles"
   add_foreign_key "rosters", "users"

@@ -8,6 +8,7 @@ class Event < ApplicationRecord
    validates :contact_name, presence: true, length: {minimum: 2}
    validates :contact_phone, presence: true, numericality: {only_integer: true}
    belongs_to :user
+   has_many :rosters, dependent: :destroy, autosave: true
 
    def transform_event
       return { 
