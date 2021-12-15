@@ -4,10 +4,10 @@ GET http://localhost:3000/api/events
 ### Successfully create an event
 POST http://localhost:3000/api/events
 content-type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzk1MjQ5MDcsInN1YiI6NH0.NqOs9apCyfIyY5bRSqERvC3o7cg6ldvrMXHfupC3ZqQ
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzk2MTM2NzAsInN1YiI6N30.6g1DJvIsKE2Qqv4GlfJutyNVkp4ihg2ByZYXJXDuJG0
 
 {
-    "name": "Authorization testing",
+    "name": "Event create testing",
     "description": "serious event",
     "date": "20/12/2021",
     "attendees": 30,
@@ -62,12 +62,12 @@ POST http://localhost:3000/api/auth/sign_up
 Content-Type: application/json
 
 {
-    "email": "johnny1@test.com",
-    "password": "111111",
-    "password_confirmation": "111111",
-    "first_name": "johnny1",
-    "last_name": "Nguyen1",
-    "phone": 111111    
+    "email": "johnny2@test.com",
+    "password": "password2",
+    "password_confirmation": "password2",
+    "first_name": "johnny2",
+    "last_name": "nguyen2",
+    "phone": 222    
 }
 
 ### Sign in with correct details
