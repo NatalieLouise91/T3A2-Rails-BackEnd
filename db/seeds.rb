@@ -47,3 +47,31 @@ if Event.all.length == 0
     )
 
 end
+
+if Roster.all.length == 0
+        Roster.create!(
+            user_id: 1,
+            event_id: 1,
+            start_time: "14:00",
+            end_time: "20:00",
+            role: "Waiter",
+            name: "Jane Doe",
+        )
+        Roster.create!(
+            user_id:1,
+            event_id: 2,
+            start_time: "15:00",
+            end_time: "21:00",
+            role: "Bartender",
+            name: "John Smith", 
+        )
+        Roster.create!(
+            user_id:1,
+            event_id: 2,
+            start_time: "16:00",
+            end_time: "22:00",
+            role: "Chef",
+            name: "John Doe",
+        )
+
+end
