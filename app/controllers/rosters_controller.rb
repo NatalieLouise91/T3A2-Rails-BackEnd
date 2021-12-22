@@ -4,12 +4,15 @@ class RostersController < ApplicationController
 
     def index
         @rosters = Roster.order(start_time: :asc)
+        render json: @rosters
     end
 
     # method to show individual rosters
 
     def show
-        render json: @roster.transform_event
+        @roster = Roster.find(params[:id])
+        render json: @roster    
+        # .transform_roster
     end
 
     # method to build new roster and associated role
@@ -58,7 +61,7 @@ class RostersController < ApplicationController
         @roster = Roster.find(params[:id])
     end 
 
-    # Required params for Roster and foreign key Role attributes
+    # Required params for Roster
 
     def roster_params
         params.require(:roster).permit(:event_id, :start_time, :end_time, :role, :name)
