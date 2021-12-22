@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     private
     #create params to pass on user create method, this is Ruby's way
     def user_params
-        params.permit(:email, :password, :password_confirmation, :first_name, :last_name, :phone, :admin)
+        params.permit(:email, :password, :password_confirmation, :first_name, :last_name, :phone, :admin, :id)
     end
 
 end

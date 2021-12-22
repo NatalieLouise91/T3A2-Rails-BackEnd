@@ -18,8 +18,8 @@ class EventsController < ApplicationController
     end
 
     def create
-        @event = Event.create(event_params)
-      #   @event = current_user.events.create(event_params)
+      #   @event = Event.create(event_params)
+        @event = current_user.events.create(event_params)
         if @event.errors.any?
             render json: @event.errors, status: :unprocessable_entity
          else
@@ -65,14 +65,14 @@ class EventsController < ApplicationController
 
     def check_ownership
         if !current_user.admin
-            if current_user.id != @event.user.id
-                render json: {error: "unauthorized action"}, status: 401
-            end
+            # if current_user.id != @event.user.id
+            #     render json: {error: "unauthorized action"}, status: 401
+            # end
         end
     end
  
     def event_params
-        params.require(:event).permit(:name, :description, :date, :attendees, :location, :time, :contact_name, :contact_phone)
+        params.require(:event).permit(:id, :name, :description, :date, :attendees, :location, :time, :contact_name, :contact_phone)
     end
 
 end
