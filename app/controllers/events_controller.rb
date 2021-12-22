@@ -18,8 +18,8 @@ class EventsController < ApplicationController
     end
 
     def create
-        @event = Event.create(event_params)
-      #   @event = current_user.events.create(event_params)
+      #   @event = Event.create(event_params)
+        @event = current_user.events.create(event_params)
         if @event.errors.any?
             render json: @event.errors, status: :unprocessable_entity
          else
@@ -63,6 +63,7 @@ class EventsController < ApplicationController
         end
     end
 
+
     def check_admin
         if !current_user.isAdmin
             # if current_user.id != @event.user.id
@@ -72,7 +73,7 @@ class EventsController < ApplicationController
     end
  
     def event_params
-        params.require(:event).permit(:name, :description, :date, :attendees, :location, :time, :contact_name, :contact_phone)
+        params.require(:event).permit(:id, :name, :description, :date, :attendees, :location, :time, :contact_name, :contact_phone)
     end
 
 end
