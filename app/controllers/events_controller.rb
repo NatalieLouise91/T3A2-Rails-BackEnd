@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
     before_action :authenticate_user, except: [:index, :show] 
     before_action :find_event, only: [:show, :update, :destroy]
-    before_action :check_ownership, only: [:destroy, :update] 
+    before_action :check_admin, only: [:destroy, :update, :create] 
 
     def index
         @events = Event.all
@@ -63,8 +63,9 @@ class EventsController < ApplicationController
         end
     end
 
-    def check_ownership
-        if !current_user.admin
+
+    def check_admin
+        if !current_user.isAdmin
             # if current_user.id != @event.user.id
             #     render json: {error: "unauthorized action"}, status: 401
             # end
