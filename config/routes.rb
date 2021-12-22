@@ -5,7 +5,7 @@ scope '/api' do
     post '/events', to: 'events#create'
     get '/events/user',to:'events#my_events'
     get '/events/:id', to: 'events#show'
-    put 'events/:id', to: 'events#update'
+    put '/events/:id', to: 'events#update'
     delete 'events/:id', to: 'events#destroy'
 scope '/auth' do 
   post '/sign_up', to: 'users#create'
