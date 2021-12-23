@@ -15,6 +15,8 @@ scope '/api' do
     put 'rosters/:id', to: 'rosters#update'
     delete 'rosters/:id', to: 'rosters#destroy'
 
+    get '/user/:id', to: 'users#show'
+
 scope '/auth' do 
   post '/sign_up', to: 'users#create'
   post '/sign_in', to: 'users#sign_in'

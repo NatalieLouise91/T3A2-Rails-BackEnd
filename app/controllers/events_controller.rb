@@ -65,10 +65,8 @@ class EventsController < ApplicationController
 
 
     def check_admin
-        if !current_user.isAdmin
-            # if current_user.id != @event.user.id
-            #     render json: {error: "unauthorized action"}, status: 401
-            # end
+        if !current_user.admin 
+            
         end
     end
  
