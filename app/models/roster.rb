@@ -5,6 +5,7 @@ class Roster < ApplicationRecord
 
   def transform_roster
     return { 
+       event_id: self.event_id,
        start_time: self.start_time,
        start_end: self.end_time,
        role: self.role,
@@ -13,5 +14,4 @@ class Roster < ApplicationRecord
        updated: self.updated_at
      }
   end
-
 end
