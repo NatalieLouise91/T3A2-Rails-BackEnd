@@ -23,6 +23,17 @@ class UsersController < ApplicationController
             render json: {error: 'Invalid password'}, status: 404
         end
     end
+
+    def index
+        @users = User.order(first_name: :asc)
+        render json: @users
+    end 
+
+    def show
+        @user = User.find(params[:id])
+        render json: @user 
+    end 
+
     private
     #create params to pass on user create method, this is Ruby's way
     def user_params
