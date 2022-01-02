@@ -22,10 +22,10 @@ class EventsController < ApplicationController
         @event = current_user.events.create(event_params)
         if @event.errors.any?
             render json: @event.errors, status: :unprocessable_entity
-         else
+        else
             render json: @event, status: 201
-         end
-      end
+        end
+    end
       
       def show
           render json: @event.transform_event
