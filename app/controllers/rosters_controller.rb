@@ -96,10 +96,11 @@ class RostersController < ApplicationController
     # Destroying roster and associated foreign key, role
 
     def destroy
-        @roster.destroy
-        respond_to do |format|
-            format.json { head :no_content }
-        end
+        @roster = Roster.find_by_id(params[:id])
+        if @roster
+          @roster.destroy
+          render json: @roster, status: 201
+        end  
     end
 
     private 
