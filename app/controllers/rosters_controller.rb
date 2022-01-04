@@ -27,69 +27,40 @@ class RostersController < ApplicationController
     # method to create new roster via grabbing roster params
     def create
 
-        
+        event_id = params["event_id"]
+        start_time = params["start_time"]
+        end_time = params["end_time"]
+        role = params["role"]
+        name = params["name"]
+        id = params["id"]
 
-        if params["0"]
-        
-            event_id_1 = params["0"]["event_id"]
-            start_time_1 = params["0"]["start_time"]
-            end_time_1 = params["0"]["end_time"]
-            role_1 = params["0"]["role"]
-            name_1 = params["0"]["name"]
-            id_1 = params["id"]
+        @roster = Roster.create(id: id.to_i, event_id: event_id.to_i, user_id: 1, start_time: start_time, end_time: end_time, role: role, name: name)
+        @roster.save
 
-            @roster = Roster.create(id: id_1.to_i, event_id: event_id_1.to_i, user_id: 1, start_time: start_time_1, end_time: end_time_1, role: role_1, name: name_1)
-            @roster.save 
-            if @roster.errors.any?
-                render json: @roster.errors, status: :unprocessable_entity
-            else
-                render json: @roster, status: 201
-            end
-
-        elsif params["1"]
-
-            event_id_2 = params["1"]["event_id"]
-            start_time_2 = params["1"]["start_time"]
-            end_time_2 = params["1"]["end_time"]
-            role_2 = params["1"]["role"]
-            name_2 = params["1"]["name"]
-            id_2 = params["id"]
-
-            @roster = Roster.create(id: id_2.to_i, event_id: event_id_2.to_i, user_id: 1, start_time: start_time_2, end_time: end_time_2, role: role_2, name: name_2)
-            @roster.save 
-            if @roster.errors.any?
-                render json: @roster.errors, status: :unprocessable_entity
-            else
-                render json: @roster, status: 201
-            end
-
-        elsif params["2"]
-            event_id_3 = params["2"]["event_id"]
-            start_time_3 = params["2"]["start_time"]
-            end_time_3 = params["2"]["end_time"]
-            role_3 = params["2"]["role"]
-            name_3 = params["2"]["name"]
-            id_3 = params["id"]
-
-            @roster = Roster.create(id: id_3.to_i, event_id: event_id_3.to_i, user_id: 1, start_time: start_time_3, end_time: end_time_3, role: role_3, name: name_3)
-            @roster.save 
-            if @roster.errors.any?
-                render json: @roster.errors, status: :unprocessable_entity
-            else
-                render json: @roster, status: 201
-            end
-        end 
+        if @roster.errors.any?
+            render json: @roster.errors, status: :unprocessable_entity
+        else
+            render json: @roster, status: 201
+        end
     end
 
     # updating roster and associated foreign key, role
 
     def update
-        respond_to do |format|
-          if @roster.update(roster_params)
-            format.json { render :show, status: :ok, location: @roster }
-          else
-            format.json { render json: @roster.errors, status: :unprocessable_entity }
-          end
+        @roster = Roster.find_by_id(params[:id])
+        @roster.event_id = params[:event_id]
+        @roster.name = params[:name]
+        @roster.role = params[:role]
+        @roster.start_time = params[:start_time]
+        @roster.end_time = params[:end_time]
+        @roster.user_id = 1
+
+        @roster.save
+
+        if @roster
+            render json:{msg: "Roster has been successfully updated"}, status: 200
+        else
+            render json:{msg: "Unable to update the selected roster"}
         end
     end
 
