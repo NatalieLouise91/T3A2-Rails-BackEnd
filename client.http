@@ -32,7 +32,7 @@ content-type: application/json
 }
 
 ### Show event id: 
-GET http://localhost:3000/api/events/2
+GET http://localhost:3000/api/events/13
 
 ### Unsuccessfully find event id: 
 GET http://localhost:3000/api/events/10
@@ -62,11 +62,11 @@ POST http://localhost:3000/api/auth/sign_up
 Content-Type: application/json
 
 {
-    "email": "userB@test.com",
-    "password": "password2",
-    "password_confirmation": "password2",
-    "first_name": "userB",
-    "last_name": "nguyen2",
+    "email": "2022user@test.com",
+    "password": "password",
+    "password_confirmation": "password",
+    "first_name": "2022",
+    "last_name": "nguyen",
     "phone": 11111111
 
 }
