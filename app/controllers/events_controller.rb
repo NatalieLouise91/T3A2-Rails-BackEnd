@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
-    before_action :authenticate_user, except: [:index, :show] 
+    before_action :authenticate_user, except: [:index, :show, :create] 
     before_action :find_event, only: [:show, :update, :destroy]
-    before_action :check_admin, only: [:destroy, :update, :create] 
+    before_action :check_host_or_admin, only: [:destroy, :update] 
 
     def index
         @events = Event.all
@@ -22,14 +22,14 @@ class EventsController < ApplicationController
         @event = current_user.events.create(event_params)
         if @event.errors.any?
             render json: @event.errors, status: :unprocessable_entity
-         else
+        else
             render json: @event, status: 201
-         end
-      end
+        end
+    end
       
-      def show
-          render json: @event.transform_event
-      end
+    def show
+        render json: @event.transform_event
+    end
 
     def update
         # @event = Event.find(params[:id])
@@ -54,6 +54,7 @@ class EventsController < ApplicationController
     #     end
     #     render json: @events
     # end
+    
     private
     def find_event
         begin
@@ -63,16 +64,16 @@ class EventsController < ApplicationController
         end
     end
 
-
-    def check_admin
-        if !current_user.admin 
-            
+    def check_host_or_admin
+        if current_user.id != @event.user.id
+            if !current_user.admin
+                render json: {error: "unauthorized action"}, status: 401
+            end
         end
     end
- 
+
     def event_params
         params.require(:event).permit(:id, :name, :description, :date, :attendees, :location, :time, :contact_name, :contact_phone)
     end
 
 end
-

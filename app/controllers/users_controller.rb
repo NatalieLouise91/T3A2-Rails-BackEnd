@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
     skip_before_action :verify_authenticity_token, raise: false
-    before_action :find_user, only: [:show, :update, :destroy]
-
     def create
         @user = User.create(user_params)
         @user.admin = false
@@ -26,20 +24,18 @@ class UsersController < ApplicationController
         end
     end
 
-      def show
-          render json: @user
-      end
+    def index
+        @users = User.order(first_name: :asc)
+        render json: @users
+    end 
+
+    def show
+        @user = User.find(params[:id])
+        render json: @user 
+    end 
+
     private
     #create params to pass on user create method, this is Ruby's way
-
-     def find_user
-        begin
-            @user = User.find(params[:id])
-        rescue
-            render json: {error: "event does not exist"}, status: 404
-        end
-    end
-
     def user_params
         params.permit(:email, :password, :password_confirmation, :first_name, :last_name, :phone, :admin, :id)
     end

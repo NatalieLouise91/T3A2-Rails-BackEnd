@@ -4,10 +4,10 @@ GET http://localhost:3000/api/events
 ### Successfully create an event
 POST http://localhost:3000/api/events
 content-type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzk2MTM2NzAsInN1YiI6N30.6g1DJvIsKE2Qqv4GlfJutyNVkp4ihg2ByZYXJXDuJG0
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDAyNTgxMjQsInN1YiI6MTB9.5onSLYUkf2MsIwbCJrJbOwDGKLD-GzeV0K6bgX04Vjc
 
 {
-    "name": "Event create testing",
+    "name": "Event A",
     "description": "serious event",
     "date": "20/12/2021",
     "attendees": 30,
@@ -32,15 +32,15 @@ content-type: application/json
 }
 
 ### Show event id: 
-GET http://localhost:3000/api/events/2
+GET http://localhost:3000/api/events/13
 
 ### Unsuccessfully find event id: 
 GET http://localhost:3000/api/events/10
 
 ### Successfully update event 1
-PUT http://localhost:3000/api/events/1
+PUT http://localhost:3000/api/events/9
 content-type: application/json
-
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDAyNTgwNDgsInN1YiI6MTF9.g30-JVZSr_4i9colqwra12bYUHY__hdX1qH9tb5EDaQ
 
 {
     "name": "Vivian",
@@ -62,12 +62,13 @@ POST http://localhost:3000/api/auth/sign_up
 Content-Type: application/json
 
 {
-    "email": "johnny2@test.com",
-    "password": "password2",
-    "password_confirmation": "password2",
-    "first_name": "johnny2",
-    "last_name": "nguyen2",
-    "phone": 222    
+    "email": "2022user@test.com",
+    "password": "password",
+    "password_confirmation": "password",
+    "first_name": "2022",
+    "last_name": "nguyen",
+    "phone": 11111111
+
 }
 
 ### Sign in with correct details
@@ -75,7 +76,7 @@ POST http://localhost:3000/api/auth/sign_in
 Content-Type: application/json
 
 {
-    "email": "johnny@test.com",
-    "password": "password1"
+    "email": "userA@test.com",
+    "password": "password2"
 }
 
