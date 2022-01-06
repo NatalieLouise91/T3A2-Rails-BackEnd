@@ -24,7 +24,6 @@ module SkemiApi
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1 and config.autoloader = :classic
 
-    config.hosts << "b4f0-103-100-225-182.ngrok.io"
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
