@@ -33,8 +33,9 @@ class RostersController < ApplicationController
         role = params["role"]
         name = params["name"]
         id = params["id"]
+        user_id = params["user_id"]
 
-        @roster = Roster.create(id: id.to_i, event_id: event_id.to_i, user_id: 1, start_time: start_time, end_time: end_time, role: role, name: name)
+        @roster = Roster.create(id: id.to_i, event_id: event_id.to_i, user_id: user_id.to_i, start_time: start_time, end_time: end_time, role: role, name: name)
         @roster.save
 
         if @roster.errors.any?
@@ -53,7 +54,7 @@ class RostersController < ApplicationController
         @roster.role = params[:role]
         @roster.start_time = params[:start_time]
         @roster.end_time = params[:end_time]
-        @roster.user_id = 1
+        @roster.user_id = params[:user_id]
 
         @roster.save
 
