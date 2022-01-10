@@ -1,7 +1,7 @@
 class RostersController < ApplicationController
-    # before_action :authenticate_user, except: [:index, :show] 
-    # before_action :find_roster, only: [:show, :update, :destroy]
-    # before_action :check_admin, only: [:destroy, :update, :create] 
+    before_action :authenticate_user, except: [:index, :show] 
+    before_action :find_roster, only: [:show, :update, :destroy]
+    before_action :check_admin, only: [:destroy, :update, :create] 
 
     # method to retrieve all rosters
 
@@ -34,8 +34,9 @@ class RostersController < ApplicationController
         name = params["name"]
         id = params["id"]
         user_id = params["user_id"]
+        author = params["author"]
 
-        @roster = Roster.create(id: id.to_i, event_id: event_id.to_i, user_id: user_id.to_i, start_time: start_time, end_time: end_time, role: role, name: name)
+        @roster = Roster.create(id: id.to_i, event_id: event_id.to_i, user_id: user_id.to_i, start_time: start_time, end_time: end_time, role: role, name: name, author: author)
         @roster.save
 
         if @roster.errors.any?
@@ -54,6 +55,7 @@ class RostersController < ApplicationController
         @roster.role = params[:role]
         @roster.start_time = params[:start_time]
         @roster.end_time = params[:end_time]
+        @roster.author = params[:author]
         @roster.user_id = params[:user_id]
 
         @roster.save
@@ -79,14 +81,30 @@ class RostersController < ApplicationController
 
     # method for before_action callback to set Roster
 
-    def set_roster
-        @roster = Roster.find(params[:id])
-    end 
+    # def set_roster
+    #     @roster = Roster.find(params[:id])
+    # end 
+
+    def find_roster
+        begin
+            @roster = Roster.find(params[:id])
+        rescue
+            render json: {error: "event does not exist"}, status: 404
+        end
+    end
+
+    def check_admin
+        # if current_user.id != @roster.user.id
+            if !current_user.admin
+                render json: {error: "unauthorized action"}, status: 401
+            end
+        # end
+    end
 
     # Required params for Roster
 
     def roster_params
-        params.require(:roster).permit(:id, :event_id, :start_time, :end_time, :role, :name)
+        params.require(:roster).permit(:id, :event_id, :start_time, :end_time, :role, :name, :author)
     end 
 
 end

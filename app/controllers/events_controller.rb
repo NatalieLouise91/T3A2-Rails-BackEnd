@@ -20,9 +20,10 @@ class EventsController < ApplicationController
         contact_name = params["contact_name"]
         contact_phone = params["contact_phone"]
         id = params["id"]
+        author = params["author"]
         user_id = 1
 
-        @event = current_user.events.create(id: id.to_i, user_id: user_id.to_i, name: name, description: description, date: date, attendees: attendees.to_i, location: location, time: time, contact_name: contact_name, contact_phone: contact_phone.to_i)
+        @event = current_user.events.create(id: id.to_i, user_id: user_id.to_i, name: name, description: description, date: date, attendees: attendees.to_i, location: location, time: time, contact_name: contact_name, contact_phone: contact_phone.to_i, author: author)
         if @event.errors.any?
             render json: @event.errors, status: :unprocessable_entity
         else
@@ -47,6 +48,7 @@ class EventsController < ApplicationController
         @event.time = params[:time]
         @event.contact_name = params[:contact_name]
         @event.contact_phone = params[:contact_phone]
+        @event.author = params[:author]
         @event.user_id = 1
 
         @event.save
@@ -92,7 +94,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-        params.require(:event).permit(:id, :name, :description, :date, :attendees, :location, :time, :contact_name, :contact_phone)
+        params.require(:event).permit(:id, :name, :description, :date, :attendees, :location, :time, :contact_name, :contact_phone, :author)
     end
 
 end
