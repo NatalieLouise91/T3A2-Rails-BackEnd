@@ -12,7 +12,7 @@ class Event < ApplicationRecord
 
    def transform_event
       return { 
-         author: self.user.first_name,
+         author: self.user.email,
          event_name: self.name,
          description: self.description,
          date: self.date,
