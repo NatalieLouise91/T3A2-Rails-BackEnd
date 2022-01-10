@@ -16,34 +16,37 @@ if Event.all.length == 0
         user_id:1,
         name: "Anniversary",
         description: "happy event",
-        date: "20/12/2021",
+        date: "2022/01/20",
         attendees: 30,
         location: "Brisbane City",
         time: "2.30pm",
         contact_name: "Johnny",
-        contact_phone: 111111 
+        contact_phone: 111111,
+        author: "johnny@test.com" 
     )
     Event.create!(
-        user_id: 2,
+        user_id: 1,
         name: "Wedding",
         description: "happy event",
-        date: "20/12/2021",
+        date: "2022/01/22",
         attendees: 20,
         location: "Brisbane City",
         time: "2.30pm",
         contact_name: "Jordan",
-        contact_phone: 222222 
+        contact_phone: 222222,
+        author: "johnny@test.com" 
     )
     Event.create!(
-        user_id: 3,
+        user_id: 1,
         name: "Graduation",
         description: "happy event",
-        date: "20/12/2021",
+        date: "2022/01/25",
         attendees: 40,
         location: "Brisbane City",
         time: "2.30pm",
         contact_name: "Natalie",
-        contact_phone: 333333 
+        contact_phone: 333333,
+        author: "johnny@test.com"
     )
 
 end
@@ -55,23 +58,26 @@ if Roster.all.length == 0
             start_time: "14:00",
             end_time: "20:00",
             role: "Waiter",
-            name: "Jane Doe",
+            name: "Johnny Nguyen",
+            author: "johnny@test.com"
         )
         Roster.create!(
-            user_id:1,
+            user_id:2,
             event_id: 2,
             start_time: "15:00",
             end_time: "21:00",
             role: "Bartender",
-            name: "John Smith", 
+            name: "Jordan Hardy",
+            author: "johnny@test.com" 
         )
         Roster.create!(
-            user_id:1,
+            user_id:3,
             event_id: 2,
             start_time: "16:00",
             end_time: "22:00",
             role: "Chef",
-            name: "John Doe",
+            name: "Natalie Louise",
+            author: "johnny@test.com"
         )
 
 end
