@@ -4,22 +4,25 @@ class EventsController < ApplicationController
     before_action :check_host_or_admin, only: [:destroy, :update] 
 
     def index
-        @events = Event.all
-      #   if (params[:username])
-      #       event.find_by_user(params[:username]).order('updated_at DESC').each do |event|
-      #           @events << Event.find_by(id: event.id).transform_event
-      #       end
-      #   else
-      #       Event.order('updated_at DESC').each do |event|
-      #           @events << Event.find_by(id: event.id).transform_event
-      #       end
-      #   end
+        # @events = Event.all
+        @events = Event.order(date: :asc)
         render json: @events
     end
 
     def create
-      #   @event = Event.create(event_params)
-        @event = current_user.events.create(event_params)
+
+        name = params["name"]
+        description = params["description"]
+        date = params["date"]
+        attendees = params["attendees"]
+        location = params["location"]
+        time = params["time"]
+        contact_name = params["contact_name"]
+        contact_phone = params["contact_phone"]
+        id = params["id"]
+        user_id = 1
+
+        @event = current_user.events.create(id: id.to_i, user_id: user_id.to_i, name: name, description: description, date: date, attendees: attendees.to_i, location: location, time: time, contact_name: contact_name, contact_phone: contact_phone.to_i)
         if @event.errors.any?
             render json: @event.errors, status: :unprocessable_entity
         else
@@ -33,7 +36,20 @@ class EventsController < ApplicationController
 
     def update
         # @event = Event.find(params[:id])
-        @event.update(event_params)
+        # @event.update(event_params)
+
+        @event = Event.find_by_id(params[:id])
+        @event.name = params[:name]
+        @event.description = params[:description]
+        @event.date = params[:date]
+        @event.attendees = params[:attendees]
+        @event.location = params[:location]
+        @event.time = params[:time]
+        @event.contact_name = params[:contact_name]
+        @event.contact_phone = params[:contact_phone]
+        @event.user_id = 1
+
+        @event.save
 
         if @event.errors.any?
             render json: @event.errors, status: :unprocessable_entity
@@ -43,8 +59,11 @@ class EventsController < ApplicationController
     end
 
     def destroy
-        @event.delete
-        render json: {event: "event deleted"}, status: 204
+        @event = Event.find_by_id(params[:id])
+        if @event
+          @event.destroy
+          render json: @event, status: 201
+        end 
     end
 
     # def my_events

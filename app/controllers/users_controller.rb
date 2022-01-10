@@ -30,9 +30,9 @@ class UsersController < ApplicationController
     end 
 
     def show
-        @user = User.find(params[:id])
-        render json: @user 
-    end 
+            @user = User.find(params[:id])
+            render json: @user
+    end
 
     private
     #create params to pass on user create method, this is Ruby's way
