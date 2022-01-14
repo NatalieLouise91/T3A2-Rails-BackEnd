@@ -6,7 +6,7 @@ class RostersController < ApplicationController
     # method to retrieve all rosters
 
     def index
-        @rosters = Roster.order(start_time: :asc)
+        @rosters = Roster.order(name: :asc)
         render json: @rosters
     end
 
