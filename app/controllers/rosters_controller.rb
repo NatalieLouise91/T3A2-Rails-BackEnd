@@ -14,8 +14,7 @@ class RostersController < ApplicationController
 
     def show
         @roster = Roster.find(params[:id])
-        render json: @roster    
-        # .transform_roster
+        render json: @roster
     end
 
     # method to create new roster
@@ -46,7 +45,7 @@ class RostersController < ApplicationController
         end
     end
 
-    # updating roster and associated foreign key, role
+    # method to update a roster
 
     def update
         @roster = Roster.find_by_id(params[:id])
@@ -67,7 +66,7 @@ class RostersController < ApplicationController
         end
     end
 
-    # Destroying roster and associated foreign key, role
+    # Destroying roster by finding by id in params
 
     def destroy
         @roster = Roster.find_by_id(params[:id])
@@ -79,11 +78,7 @@ class RostersController < ApplicationController
 
     private 
 
-    # method for before_action callback to set Roster
-
-    # def set_roster
-    #     @roster = Roster.find(params[:id])
-    # end 
+    # method for before_action callback to find Roster 
 
     def find_roster
         begin
@@ -93,12 +88,12 @@ class RostersController < ApplicationController
         end
     end
 
+    # method for before_action callback to check admin
+
     def check_admin
-        # if current_user.id != @roster.user.id
             if !current_user.admin
                 render json: {error: "unauthorized action"}, status: 401
             end
-        # end
     end
 
     # Required params for Roster

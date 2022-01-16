@@ -10,6 +10,13 @@ class Event < ApplicationRecord
    belongs_to :user
    has_many :rosters, dependent: :destroy, autosave: true
 
+  # an event belongs to a user and has many rosters. 
+  # associated rosters are dependent and will be updated and destroyed if the event they belong to is updated or destroyed.
+  # validation of required params to ensure these params are filled out in forms. 
+  # minimum length is set and also numericality where applicable.
+
+
+  # transform_event method to provide additional details for an event's show method
    def transform_event
       return { 
          author: self.user.email,
