@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+#   routes for all controllers
 scope '/api' do
     get '/events', to: 'events#index'
     post '/events', to: 'events#create'

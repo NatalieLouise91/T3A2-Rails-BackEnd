@@ -5,14 +5,12 @@ class EventsController < ApplicationController
 
 
     # method to show all associated events in database, order by date ascending
-
     def index
         @events = Event.order(date: :asc)
         render json: @events
     end
 
     # method to create an event 
-
     def create
 
         name = params["name"]
