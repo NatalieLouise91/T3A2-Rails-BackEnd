@@ -3,11 +3,15 @@ class EventsController < ApplicationController
     before_action :find_event, only: [:show, :update, :destroy]
     before_action :check_host_or_admin, only: [:destroy, :update] 
 
+
+    # method to show all associated events in database, order by date ascending
+
     def index
-        # @events = Event.all
         @events = Event.order(date: :asc)
         render json: @events
     end
+
+    # method to create an event 
 
     def create
 
@@ -30,14 +34,16 @@ class EventsController < ApplicationController
             render json: @event, status: 201
         end
     end
+
+    # method to show an individual event and transform that event via method in event model
       
     def show
         render json: @event.transform_event
     end
 
+    # method to update an event and its associated foreign key roster entity
+
     def update
-        # @event = Event.find(params[:id])
-        # @event.update(event_params)
 
         @event = Event.find_by_id(params[:id])
         @event.name = params[:name]
@@ -60,6 +66,8 @@ class EventsController < ApplicationController
         end
     end
 
+    # Destroying roster by finding by id in params, destroying all associated foreign keys, rosters
+
     def destroy
         @event = Event.find_by_id(params[:id])
         if @event
@@ -67,16 +75,11 @@ class EventsController < ApplicationController
           render json: @event, status: 201
         end 
     end
-
-    # def my_events
-    #     @events = []
-    #     Event.find_by_user(current_user.username).order('updated_at DESC').each do |event|
-    #         @events << event.find_by(id: event.id).transform_event
-    #     end
-    #     render json: @events
-    # end
     
     private
+
+    # method for before_action callback to find an event
+
     def find_event
         begin
             @event = Event.find(params[:id])
@@ -85,6 +88,8 @@ class EventsController < ApplicationController
         end
     end
 
+    # method for before_action callback to check admin
+
     def check_host_or_admin
         if current_user.id != @event.user.id
             if !current_user.admin
@@ -92,6 +97,8 @@ class EventsController < ApplicationController
             end
         end
     end
+
+    # Required params for the creation of an event
 
     def event_params
         params.require(:event).permit(:id, :name, :description, :date, :attendees, :location, :time, :contact_name, :contact_phone, :author)

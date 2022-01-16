@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
     skip_before_action :verify_authenticity_token, raise: false
+
+    # method to create a user
+
     def create
         @user = User.create(user_params)
         @user.admin = false
@@ -14,6 +17,8 @@ class UsersController < ApplicationController
         end
     end
 
+    # method to sign in a user through knock authication
+
     def sign_in
         @user = User.find_by_email(params[:email])
         if @user && @user.authenticate(params[:password])
@@ -24,10 +29,14 @@ class UsersController < ApplicationController
         end
     end
 
+    # method to retrieve all users and order them by name
+
     def index
         @users = User.order(first_name: :asc)
         render json: @users
     end 
+
+    # method to show individual users
 
     def show
             @user = User.find(params[:id])

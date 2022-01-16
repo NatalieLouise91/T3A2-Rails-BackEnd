@@ -27,4 +27,5 @@ class User < ApplicationRecord
   def generate_base64_token
     test = SecureRandom.urlsafe_base64
   end
+
 end
