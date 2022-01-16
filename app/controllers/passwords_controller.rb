@@ -1,4 +1,6 @@
 class PasswordsController < ApplicationController
+
+   # method called on forgot password route
    def forgot
     @user = User.find_by(email: params[:_json])
     if @user
@@ -14,6 +16,7 @@ class PasswordsController < ApplicationController
     end
   end
 
+#   method to reset password 
   def reset
     @user = User.find_by(reset_password_token: params[:token], email: params[:email])
     if @user.present? && user.password_token_valid?
