@@ -18,6 +18,9 @@ scope '/api' do
     get '/users', to: 'users#index'
     get '/users/:id', to: 'users#show'
     get '/users/:email', to: 'users#show'
+
+    post '/forgot_password', to: 'passwords#forgot'
+    post '/reset_password', to: 'passwords#reset'
     
 
 scope '/auth' do 
