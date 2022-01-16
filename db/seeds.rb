@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 if User.count == 0
-    User.create!(email: "johnny@test.com", password: "password1", password_confirmation: "password1", first_name: "Johnny", last_name: "Nguyen", phone: 000000, admin: true)
-    User.create!(email: "jordan@test.com", password: "password2", password_confirmation: "password2", first_name: "Jordan", last_name: "Hardy", phone: 111111)
-    User.create!(email: "nat@test.com", password: "password3", password_confirmation: "password3", first_name: "Nat", last_name: "Louise", phone: 222222)
+    User.create!(email: "johnny@test.com", password: "password1", password_confirmation: "password1", first_name: "Johnny", last_name: "Nguyen", phone: 0404040400, admin: true)
+    User.create!(email: "jordan@test.com", password: "password2", password_confirmation: "password2", first_name: "Jordan", last_name: "Hardy", phone: 0404040401)
+    User.create!(email: "nat@test.com", password: "password3", password_confirmation: "password3", first_name: "Nat", last_name: "Louise", phone: 0404040402)
 end
 
 if Event.all.length == 0
@@ -21,7 +21,7 @@ if Event.all.length == 0
         location: "Brisbane City",
         time: "2.30pm",
         contact_name: "Johnny",
-        contact_phone: 111111,
+        contact_phone: 0404040400,
         author: "johnny@test.com" 
     )
     Event.create!(
@@ -33,7 +33,7 @@ if Event.all.length == 0
         location: "Brisbane City",
         time: "2.30pm",
         contact_name: "Jordan",
-        contact_phone: 222222,
+        contact_phone: 0404040401,
         author: "johnny@test.com" 
     )
     Event.create!(
@@ -45,7 +45,7 @@ if Event.all.length == 0
         location: "Brisbane City",
         time: "2.30pm",
         contact_name: "Natalie",
-        contact_phone: 333333,
+        contact_phone: 0404040402,
         author: "johnny@test.com"
     )
 
