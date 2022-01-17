@@ -12,6 +12,8 @@ class PasswordsController < ApplicationController
     end  
    end
 
+   # method called on reset password route
+
   def reset
     @user = User.find_signed(params[:token], purpose: "password_reset")
     @user.password = params[:password]
