@@ -1,18 +1,8 @@
 class UserMailer < ApplicationMailer
 
-  default from: 'skemi_application@outlook.com'
-  
-  # method to send email to user
-  # def password_reset(user, token)
-  #   @token = token
-  #   @user = user
-    # @url = "https://skemi.netlify.app/reset_password/#{@token}"
-  #   mail(
-  #     from: "support@skemi.com", 
-  #     to: @user.email, 
-  #     subject: "Password Reset"
-  #   )
-  # end
+  default from: 'no-reply@example.com'
+
+  # password reset mailer function
 
   def password_reset
     @token = params[:user].signed_id(purpose: "password_reset", expires_in: 15.minutes)
