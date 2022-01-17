@@ -2,35 +2,25 @@ class PasswordsController < ApplicationController
 
    # method called on forgot password route
    def forgot
-    @user = User.find_by(email: params[:_json])
-    if @user
-      render json: {
-        alert: "If this user exists, we have sent you a password reset email."
-      }
-      @user.send_password_reset
-    else
-      #this sends regardless of whether there's an email in database for security reasons
-      render json: {
-        alert: "If this user exists, we have sent you a password reset email."
-      }
-    end
-  end
+    @user = User.find_by(email: params[:email])
 
-#   method to reset password 
-  def reset
-    @user = User.find_by(reset_password_token: params[:token], email: params[:email])
-    if @user.present? && user.password_token_valid?
-      if @user.reset_password(params[:password])
-        render json: {
-          alert: "Your password has been successfuly reset!"
-        }
-        session[:user_id] = @user.id
-      else
-        render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
-      end
+    if @user.present?
+      UserMailer.with(user: @user).password_reset.deliver_now
+      render json:{success:"We have sent you an email with the steps to reset your password"}, status: 200
     else
-      render json: {error:  ['Link not valid or expired. Try generating a new link.']}, status: :not_found
-    end
+      render json:{errors:"Email invalid"}
+    end  
+   end
+
+  def reset
+    @user = User.find_signed(params[:token], purpose: "password_reset")
+    @user.password = params[:password]
+    @user.save   
+    if @user
+      render json:{msg:"Credentials successfuly saved, please login with your new password"}, status: 200
+    else  
+      render json:{msg:"Something went wrong, please try again later or contact the admin"}, status: 404
+    end     
   end
 
 end
